@@ -5,6 +5,7 @@ import (
 	"flag"
 	"fmt"
 	"os"
+	"strings"
 )
 
 func main() {
@@ -38,7 +39,8 @@ func RemoveDuplicates(filePath string) error {
 
 	for scanner.Scan() {
 		line := scanner.Text()
-		if !seen[line] {
+		// 检查是否为空行
+		if strings.TrimSpace(line) != "" && !seen[line] {
 			seen[line] = true
 			_, err := writer.WriteString(line + "\n")
 			if err != nil {
